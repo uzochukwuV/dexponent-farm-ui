@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form"
 import StepController from "./Controller";
 
 function Step1FarmConfig() {
-    const { register, watch, setValue, formState: { errors } } = useFormContext();
+    const { register, watch, formState: { errors } } = useFormContext();
 
     const [verifierSplit, yodaSplit] = watch(['verifierIncentiveSplit', 'yieldYodaIncentiveSplit']);
 

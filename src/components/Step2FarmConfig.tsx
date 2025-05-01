@@ -5,8 +5,8 @@ import StepController from './Controller';
 
 
 function Step2FarmConfig() {
-    const { register, watch, formState: { errors } } = useFormContext();
-    const asset = watch('asset');
+    const { register, formState: { errors } } = useFormContext();
+    // const asset = watch('asset');
 
     const { data: assetPrice } = useQuery(
         {

@@ -12,7 +12,7 @@ import Step5DeploymentSummary from "./Step5DeploymentSumarry"
 
 
 function FarmWizard() {
-    const { step, next, prev, move } = useStepStore();
+    const { step, move } = useStepStore();
 
 
     return (
