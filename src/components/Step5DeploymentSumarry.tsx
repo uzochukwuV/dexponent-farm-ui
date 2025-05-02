@@ -15,7 +15,7 @@ function Step5DeploymentSummary() {
     // Helper function to render a section title and its fields
     const renderSection = (title: string, fields: Array<{ key: keyof FarmFormValues, label: string, format?: (value: any) => string }>) => (
         <div className="mb-6">
-            <h3 className="text-white text-lg font-semibold mb-3">{title}</h3>
+            <h3 className="text-[var(--primary)] text-lg font-semibold mb-3">{title}</h3>
             <div className="space-y-2">
                 {fields.map(({ key, label, format }) => {
                     const value = formValues[key];
@@ -25,9 +25,9 @@ function Step5DeploymentSummary() {
                         : 'Not set';
 
                     return (
-                        <div key={key} className="flex justify-between border-b border-white/10 pb-2">
-                            <span className="text-white/70">{label}:</span>
-                            <span className="text-white font-medium">{displayValue}</span>
+                        <div key={key} className="flex justify-between border-b border-[var(--primary)]/10 pb-2">
+                            <span className="text-[var(--primary)]/70">{label}:</span>
+                            <span className="text-[var(--primary)] font-medium">{displayValue}</span>
                         </div>
                     );
                 })}
@@ -36,10 +36,10 @@ function Step5DeploymentSummary() {
     );
 
     return (
-        <div className='text-white/80 border-1 text-sm space-y-6 border-white/20 rounded-3xl p-6'>
+        <div className='text-[var(--primary)]/80 border-1 text-sm space-y-6 border-[var(--primary)]/20 rounded-3xl p-6'>
             <div>
-                <p className="text-white text-xl font-bold">Deployment Summary</p>
-                <p className="text-white/70 mt-1">Review all your settings before deploying the Farm.</p>
+                <p className="text-[var(--primary)] text-xl font-bold">Deployment Summary</p>
+                <p className="text-[var(--primary)]/70 mt-1">Review all your settings before deploying the Farm.</p>
             </div>
 
             {/* Render each section using the helper function */}
@@ -96,7 +96,7 @@ function Step5DeploymentSummary() {
                     })}
                     className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
-                <label htmlFor="termsAccepted" className="ml-2 block text-sm text-white/80">
+                <label htmlFor="termsAccepted" className="ml-2 block text-sm text-[var(--primary)]/80">
                     I have reviewed and accept the terms and conditions.
                 </label>
             </div>

@@ -16,9 +16,9 @@ function Step2FarmConfig() {
         }
     );
     return (
-        <div className=' text-white/80 border-1 text-sm space-y-4 border-white/20 rounded-3xl p-6'>
+        <div className=' text-[var(--primary)]/80 border-1 text-sm space-y-4 border-[var(--primary)]/20 rounded-3xl p-6'>
             <div>
-                <p className=" text-white">Set Strategy Parameters</p>
+                <p className=" text-[var(--primary)]">Set Strategy Parameters</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -31,7 +31,7 @@ function Step2FarmConfig() {
                             min: { value: 0.1, message: 'Minimum 0.1%' },
                             max: { value: 100, message: 'Maximum 100%' }
                         })}
-                        className="w-full p-2 py-4 bg-white/15 rounded-xl"
+                        className="w-full p-2 py-4 bg-[var(--primary)]/15 rounded-xl"
                     />
                     {errors.targetAPY && (
                         <span className="text-red-500">{errors.targetAPY.message as string}</span>
@@ -45,7 +45,7 @@ function Step2FarmConfig() {
                             required: 'Required',
                             min: { value: 7, message: 'Minimum 7 days' }
                         })}
-                        className="w-full p-2 py-4 bg-white/15 rounded-xl"
+                        className="w-full p-2 py-4 bg-[var(--primary)]/15 rounded-xl"
                     />
                 </div>
             </div>
@@ -70,7 +70,7 @@ function Step2FarmConfig() {
                         min: { value: 0, message: 'Minimum 0%' },
                         max: { value: 100, message: 'Maximum 100%' }
                     })}
-                    className="w-full p-2 py-4 bg-white/15 rounded-xl"
+                    className="w-full p-2 py-4 bg-[var(--primary)]/15 rounded-xl"
                 />
             </div>
             <StepController />

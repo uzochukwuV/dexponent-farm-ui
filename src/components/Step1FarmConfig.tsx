@@ -25,15 +25,15 @@ function Step1FarmConfig() {
 
 
     return (
-        <div className=" text-white/80 border-1 text-sm space-y-4 border-white/20 rounded-2xl p-6">
+        <div className=" text-[var(--primary)]/80 border-1 text-sm space-y-4 border-[var(--primary)]/20 rounded-2xl p-6">
             <div>
-                <p className=" text-white">Set Farm Parameters</p>
+                <p className=" text-[var(--primary)]">Set Farm Parameters</p>
             </div>
             <div>
                 <label className="block mb-2 ">Farm Name</label>
                 <input
                     {...register('farmName', { required: 'Required', maxLength: 50 })}
-                    className="w-full p-2 py-4 bg-white/15 rounded-xl"
+                    className="w-full p-2 py-4 bg-[var(--primary)]/15 rounded-xl"
                 />
                 {errors.farmName && <span className="text-red-500">{errors?.farmName?.message as string}</span>}
             </div>
@@ -42,9 +42,9 @@ function Step1FarmConfig() {
                     <div className=" flex justify-between items-center">
                         <label className=" mb-2 flex">Principal Asset</label>
                         {/* Price updates */}
-                        <span className=" text-white">{isLoading ? "...." : price.toFixed(4)} </span>
+                        <span className=" text-[var(--primary)]">{isLoading ? "...." : price.toFixed(4)} </span>
                     </div>
-                    <div className=" w-full h-[50px] p-2 py-4 relative  bg-white/15 rounded-xl block">
+                    <div className=" w-full h-[50px] p-2 py-4 relative  bg-[var(--primary)]/15 rounded-xl block">
                         <div onClick={() => setDropdown((prev) => !prev)} className=" h-full w- w-full  rounded-xl flex gap-3 items-center">
                             <div>
                                 <img src={`/${Tokens.find((t) => t.address == asset)?.name}.png`} width={30} alt="" />
@@ -54,7 +54,7 @@ function Step1FarmConfig() {
                             </div>
                         </div>
                         {
-                            dropdown && <div className="absolute top-[110%] cursor-pointer right-0 left-0 h-fit  bg-[#131313] rounded-xl">
+                            dropdown && <div className="absolute top-[110%] cursor-pointer right-0 left-0 h-fit  bg-[var(--background)] rounded-xl">
                                 {
                                     Tokens.map((t) => (
                                         <div key={t.address} onClick={() => {
@@ -84,9 +84,9 @@ function Step1FarmConfig() {
                     <select
                         {...register('strategyType')}
 
-                        className="w-full p-2 py-4  bg-white/15 rounded-xl block"
+                        className="w-full p-2 py-4  bg-[var(--primary)]/15 rounded-xl block"
                     >
-                        <option value="yield" className=" bg-black ">
+                        <option value="yield" className=" ">
                             Yield Farming
                         </option>
                         <option value="liquidity" className=" bg-black ">Liquidity Provision</option>
@@ -104,7 +104,7 @@ function Step1FarmConfig() {
                         min="0"
                         max="30"
                         {...register('verifierIncentiveSplit')}
-                        className="w-full bg-transparent"
+                        className="w-full bg-[var(--primary)] "
                     />
                 </div>
 
@@ -127,7 +127,7 @@ function Step1FarmConfig() {
                     <label className="block mb-2 ">Claim Token Name</label>
                     <input
                         {...register('claimTokenName', { required: 'Required' })}
-                        className="w-full p-2 py-4 bg-white/15 rounded-xl"
+                        className="w-full p-2 py-4 bg-[var(--primary)]/15 rounded-xl"
                     />
                     {errors.claimTokenName && <span className="text-red-500">{errors?.claimTokenName?.message as string}</span>}
                 </div>
@@ -135,7 +135,7 @@ function Step1FarmConfig() {
                     <label className="block mb-2 ">Claim Token Symbol</label>
                     <input
                         {...register('claimTokenSymbol', { required: 'Required' })}
-                        className="w-full p-2 py-4 bg-white/15 rounded-xl"
+                        className="w-full p-2 py-4 bg-[var(--primary)]/15 rounded-xl"
                     />
                     {errors.claimTokenSymbol && <span className="text-red-500">{errors?.claimTokenSymbol?.message as string}</span>}
                 </div>

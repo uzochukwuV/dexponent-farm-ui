@@ -8,9 +8,9 @@ export function Step4FeeStructure() {
     const managementFee = watch('managementFee') || 0;
 
     return (
-        <div className=' text-white/80 border-1 text-sm space-y-4 border-white/20 rounded-3xl p-6'>
+        <div className=' text-[var(--primary)]/80 border-1 text-sm space-y-4 border-[var(--primary)]/20 rounded-3xl p-6'>
             <div>
-                <p className=" text-white">Set Fee Structure</p>
+                <p className=" text-[var(--primary)]">Set Fee Structure</p>
             </div>
             <div>
                 <label className="block mb-2">Performance Fee ({performanceFee}%)</label>
@@ -50,7 +50,7 @@ export function Step4FeeStructure() {
                             message: 'Invalid Ethereum address'
                         }
                     })}
-                    className="w-full p-2 py-4 bg-white/15 rounded-xl"
+                    className="w-full p-2 py-4 bg-[var(--primary)]/15 rounded-xl"
                     placeholder="0x..."
                 />
             </div>

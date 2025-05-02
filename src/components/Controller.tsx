@@ -6,13 +6,13 @@ function StepController() {
         <div>
             <div className=" flex  justify-between">
                 {
-                    step > 1 ? <button onClick={() => prev()} type="button" className=" px-6 py-2 bg-white rounded-xl text-black font-semibold">Previous</button> : <div></div>
+                    step > 1 ? <button onClick={() => prev()} type="button" className=" px-6 py-2 bg-[var(--button)] text-[var(--background)] rounded-xl  font-semibold">Previous</button> : <div></div>
                 }
                 {
-                    step < 5 ? <button onClick={() => next()} type="button" className=" px-6 py-2 bg-white rounded-xl text-black font-semibold">Next</button> : <div></div>
+                    step < 5 ? <button onClick={() => next()} type="button" className=" px-6 py-2 bg-[var(--button)] rounded-xl text-[var(--background)] font-semibold">Next</button> : <div></div>
                 }
                 {
-                    step == 5 && <button onClick={() => next()} type="button" className=" px-6 py-2 bg-white rounded-xl text-black font-semibold">Deploy</button>
+                    step == 5 && <button onClick={() => next()} type="button" className=" px-6 py-2 bg-[var(--button)] rounded-xl text-[var(--background)] font-semibold">Deploy</button>
                 }
             </div>
         </div>

@@ -1,5 +1,19 @@
 @import 'tailwindcss';
 
+:root {
+  --background: #131313;
+  --step: #fff;
+  --button: #fff;
+  --primary: #fff;
+}
+
+body.dark {
+  --background: #f2f2f2;
+  --step: #111;
+  --button: #111;
+  --primary: #111;
+}
+
 body {
   @apply m-0;
   font-family:
