@@ -1,6 +1,6 @@
 import { ethers, Contract, FallbackProvider, JsonRpcProvider } from 'ethers'; // Import necessary types from ethers
 import { abi as IUniswapV3PoolABI } from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json';
-import { useEthersProvider } from '@/context/WalletContext';
+
 
 // Define an interface for the constructor parameters
 interface UniswapV3TwapOracleParams {
@@ -27,7 +27,6 @@ interface MultipleTimeWindowTwapsResult {
  */
 class UniswapV3TwapOracle {
     private provider: JsonRpcProvider | FallbackProvider | undefined;
-    private poolAddress: string;
     private poolContract: Contract;
     private token0Address: string | undefined; // Use string for addresses
     private token1Address: string | undefined;
@@ -36,7 +35,6 @@ class UniswapV3TwapOracle {
 
     constructor({ provider, poolAddress }: UniswapV3TwapOracleParams) {
         this.provider = provider;
-        this.poolAddress = poolAddress;
         this.poolContract = new ethers.Contract(poolAddress, IUniswapV3PoolABI, provider);
     }
 
@@ -126,8 +124,7 @@ class UniswapV3TwapOracle {
             // Calculate TWAP for each time window
             for (let i = 0; i < sortedWindows.length; i++) {
                 const window = sortedWindows[i];
-                // tickCumulatives[0] is the current cumulative tick
-                // tickCumulatives[i+1] is the cumulative tick `window` seconds ago
+              
                 const tickCumulativesDelta = Number(tickCumulatives[0] - tickCumulatives[i + 1]);
                 const arithmeticMeanTick = tickCumulativesDelta / window;
                 const price = this.tickToPrice(Math.floor(arithmeticMeanTick));
@@ -172,8 +169,6 @@ class UniswapV3TwapOracle {
             // Calculate the difference in cumulative ticks
             const tickCumulativesDelta: bigint = currentTickCumulative - pastTickCumulative;
 
-            // Calculate the arithmetic mean tick
-            // Convert delta to number for division if safe, or use BigInt division if available/needed
             const tickDeltaNumber = Number(tickCumulativesDelta); // Potential precision loss
             const arithmeticMeanTick = tickDeltaNumber / secondsAgo;
 
@@ -194,11 +189,8 @@ class UniswapV3TwapOracle {
      * @returns {number} The price (token1/token0)
      */
     private tickToPrice(tick: number): number {
-        // Price = 1.0001^tick
-        const price = Math.pow(1.0001, tick);
 
-        // Adjust for decimals
-        // Ensure decimals are numbers before using in Math.pow
+        const price = Math.pow(1.0001, tick);
         const token0Decimals = this.token0Decimals !== undefined ? this.token0Decimals : 18; // Default if not initialized
         const token1Decimals = this.token1Decimals !== undefined ? this.token1Decimals : 18; // Default if not initialized
 
@@ -213,42 +205,17 @@ class UniswapV3TwapOracle {
      * @returns {number} The price (token1/token0)
      */
     private sqrtPriceX96ToPrice(sqrtPriceX96: bigint): number {
-        // Ensure decimals are initialized
+       
         if (this.token0Decimals === undefined || this.token1Decimals === undefined) {
-            // This method is called from getCurrentPrice which initializes, but good practice to check
-            // In a real scenario, you might throw an error or initialize here if needed.
+            
             console.warn("Decimals not initialized when converting sqrtPriceX96 to price.");
-            // Fallback to default decimals if not initialized
+            
         }
-
-        // Convert sqrtPriceX96 (UQ112.112) to price (token1 / token0)
-        // Price = (sqrtPriceX96 / 2^96)^2
-        // Using BigInt for accurate division before converting to Number
-        const priceX96 = (sqrtPriceX96 * sqrtPriceX96) / (2n ** 192n); // (2^96)^2 = 2^192
-
-        // Convert the price (which is now in a UQ format relative to token decimals) to a standard number
-        // Need to account for the 1e18 scaling factor often used in Solidity for fixed-point math
-        // And the token decimals difference.
-        // The raw price from tick/sqrtPrice is P = (token1_units / token0_units) * (10^decimals0 / 10^decimals1)
-        // We want price in standard units, so we divide by 10^(decimals0 - decimals1)
-        // The priceX96 is P * 2^192.
-        // So P = priceX96 / 2^192.
-        // To get the price in standard units: P_standard = P * (10^decimals0 / 10^decimals1)
-        // P_standard = (priceX96 / 2^192) * (10^decimals0 / 10^decimals1)
-
-        // A simpler way based on common implementations:
-        // The price from sqrtPriceX96 directly relates to the price in terms of token units.
-        // P = (sqrt(price) * 2^96)^2 / (2^96)^2 = price
-        // The price returned by the pool is token1 per token0.
-        // To get the price in terms of standard units (e.g., USD per ETH), you need to account for decimals.
-        // Price (in standard units) = Raw Price * (10^decimals0 / 10^decimals1)
-        // Raw Price = (sqrtPriceX96 / 2^96)^2
-
         const Q96 = 2n ** 96n;
-        const priceRaw = Number(sqrtPriceX96) / Number(Q96); // Convert to number for Math.pow
+        const priceRaw = Number(sqrtPriceX96) / Number(Q96);
         const price = Math.pow(priceRaw, 2);
 
-        // Adjust for decimals
+       
         const token0Decimals = this.token0Decimals !== undefined ? this.token0Decimals : 18;
         const token1Decimals = this.token1Decimals !== undefined ? this.token1Decimals : 18;
         console.log(price, token0Decimals, token1Decimals)

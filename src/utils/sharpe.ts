@@ -1,4 +1,3 @@
-import { ethers } from 'ethers'; // Assuming ethers is still used for potential interactions or types
 
 // Define interfaces for the expected structure of the TWAP oracle dependency
 interface IUniswapV3TwapOracle {
@@ -99,7 +98,6 @@ class SharpeAndFeeAnalyzer {
     private twapOracle: IUniswapV3TwapOracle;
     private riskFreeRate: number;
     private annualizationFactor: number;
-    private lookbackPeriods: number[]; // Days for historical analysis - Note: not used in current implementation
     private volBands: {
         [key: string]: { max: number; minFee: number; maxFee: number };
     };
@@ -108,7 +106,6 @@ class SharpeAndFeeAnalyzer {
         this.twapOracle = twapOracle;
         this.riskFreeRate = 0.03; // Assumed 3% annual risk-free rate, can be adjusted
         this.annualizationFactor = Math.sqrt(365); // For daily returns to annual
-        this.lookbackPeriods = [1, 7, 30, 90]; // Days for historical analysis - Note: not used in current implementation
         this.volBands = {
             veryLow: { max: 0.10, minFee: 0.0010, maxFee: 0.0020 }, // 10% vol
             low: { max: 0.20, minFee: 0.0020, maxFee: 0.0040 },     // 20% vol

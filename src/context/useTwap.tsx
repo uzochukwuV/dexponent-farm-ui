@@ -17,7 +17,7 @@ export function useTwapOracle({poolAddress}:any): { price: number; updateTwap : 
     useEffect(()=>{
         setLoading(true)
         const twapOracle = new UniswapV3TwapOracle({ provider, poolAddress });
-        twapOracle.initialize().then((data)=>{
+        twapOracle.initialize().then(()=>{
             twapOracle.getCurrentPrice().then((value)=>{
                 console.log(value)
                 setPrice(value.price)
@@ -30,7 +30,7 @@ export function useTwapOracle({poolAddress}:any): { price: number; updateTwap : 
         console.log(address)
         setLoading(true)
         const twapOracle = new UniswapV3TwapOracle({ provider, poolAddress:address });
-        twapOracle.initialize().then((data)=>{
+        twapOracle.initialize().then(()=>{
             twapOracle.getCurrentPrice().then((value)=>{
                 console.log(value)
                 setPrice(value.price)
