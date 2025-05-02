@@ -80,7 +80,8 @@ function Step5DeploymentSummary() {
 
             {/* Add the Claim Token and Farm Owner fields */}
              {renderSection("Deployment Details", [
-                { key: 'claimToken', label: 'Claim Token Address' },
+                { key: 'claimTokenName', label: 'Claim Token Name' },
+                { key: 'claimTokenSymbol', label: 'Claim Token Symbol' },
                 { key: 'farmOwner', label: 'Farm Owner Address' },
              ])}
 
