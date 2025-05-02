@@ -34,7 +34,28 @@ export const FARM_CREATION_STEPS = [
   // TypeScript type for the steps
   export type FarmCreationStep = typeof FARM_CREATION_STEPS[number];
 
-
+export const Strategy = [
+  {
+    name:"Yield Farming",
+    type:"yield",
+    description:"Earn returns through liquidity provision in DeFi protocols"
+  },
+  {
+    name:"Liquidity Provision",
+    type:"liquidity",
+    description:"Provide liquidity to DEXs and earn trading fees"
+  },
+  {
+    name:"Staking",
+    type:"staking",
+    description:"Stake assets to secure networks and earn rewards"
+  },
+  {
+    name:"Arbitrage",
+    type:"arbitrage",
+    description:"Profit from price differences across different markets"
+  }
+]
 
 
   export const Tokens = [

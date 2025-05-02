@@ -11,7 +11,7 @@ export const ConnectButton = () => {
         <button onClick={() => disconnect()}>Disconnect</button>
       ) : (
         connectors.map((connector) => (
-          <button key={connector.uid} onClick={() => connect({ connector })}>
+          <button className=" px-4" key={connector.uid} onClick={() => connect({ connector })}>
             {connector.name}
           </button>
         ))

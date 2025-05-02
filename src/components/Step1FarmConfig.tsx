@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form"
 import StepController from "./Controller";
-import { POOLS, Tokens } from "@/utils/constants";
+import { POOLS, Strategy, Tokens } from "@/utils/constants";
 import { useEffect, useState } from "react";
 import { useTwapOracle } from "@/context/useTwap";
 
@@ -8,11 +8,12 @@ import { useTwapOracle } from "@/context/useTwap";
 
 function Step1FarmConfig() {
     const [dropdown, setDropdown] = useState(false)
+    const [dropdown0, setDropdown0] = useState(false)
     const { register, watch, formState: { errors }, setValue } = useFormContext()
     const [poolAddress, setPoolAddress] = useState(POOLS[0].address)
     const { price, updateTwap, isLoading } = useTwapOracle({ poolAddress })
 
-    const [verifierSplit, yodaSplit, asset, lpIncentiveSplit] = watch(['verifierIncentiveSplit', 'yieldYodaIncentiveSplit', 'asset', 'lpIncentiveSplit']);
+    const [verifierSplit, yodaSplit, asset, lpIncentiveSplit, strategyType] = watch(['verifierIncentiveSplit', 'yieldYodaIncentiveSplit', 'asset', 'lpIncentiveSplit', "strategyType"]);
 
     useEffect(() => {
         const lpSplit = 100 - verifierSplit - yodaSplit;
@@ -81,17 +82,35 @@ function Step1FarmConfig() {
 
                 <div>
                     <label className="block mb-2">Strategy Type</label>
-                    <select
-                        {...register('strategyType')}
+                    <div>
 
-                        className="w-full p-2 py-4  bg-[var(--primary)]/15 rounded-xl block"
-                    >
-                        <option value="yield" className=" ">
-                            Yield Farming
-                        </option>
-                        <option value="liquidity" className=" bg-black ">Liquidity Provision</option>
-                        <option value="arbitrage" className=" bg-black ">Arbitrage</option>
-                    </select>
+                    </div>
+                    <div className=" w-full h-[50px] p-2 py-4 relative  bg-[var(--primary)]/15 rounded-xl block">
+                        <div onClick={() => setDropdown0((prev) => !prev)} className=" h-full w- w-full px-2  rounded-xl flex gap-3 items-center">
+                            <div>
+                                {strategyType.toUpperCase()}
+                            </div>
+                        </div>
+                        {
+                            dropdown0 && <div className="absolute top-[110%] cursor-pointer right-0 left-0 h-fit px-4 bg-[var(--background)] rounded-xl">
+                                {
+                                    Strategy.map((t) => (
+                                        <div key={t.type} onClick={() => {
+                                            setValue("strategyType", t.type);
+                                            setDropdown0(false);
+                                        }} className=" w-full h-[80px] rounded-xl text-[var(--primary)] cursor-pointer py-2 flex flex-col gap-1 items-start">
+                                            <div>
+                                                {t.name}
+                                            </div>
+                                            <div className=" mb-2 text-xs text-[var(--primary)]/40">
+                                                {t.description}
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
             <div className="space-y-4">
