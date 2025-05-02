@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { UniswapV3TwapOracle } from '@/utils/uniswap';
+import { useEthersProvider } from '@/context/WalletContext';
 
 
 // Common Uniswap V3 pool addresses on Ethereum mainnet
@@ -55,7 +56,7 @@ function UniswapTwapOracle() {
     setTwaps({});
     
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      const provider = useEthersProvider()
       const twapOracle = new UniswapV3TwapOracle({provider, poolAddress});
       await twapOracle.initialize();
       
