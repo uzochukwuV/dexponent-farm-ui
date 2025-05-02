@@ -50,7 +50,7 @@ function Step5DeploymentSummary() {
                 { key: 'verifierIncentiveSplit', label: 'Verifiers Split (%)', format: (value: number) => `${value}%` },
                 { key: 'yieldYodaIncentiveSplit', label: 'Yield Yodas Split (%)', format: (value: number) => `${value}%` },
                 // LP split is implicitly 100 - verifier - yoda, or you can add it if stored separately
-                // { key: 'lpIncentiveSplit', label: 'LPs Split (%)', format: (value: number) => `${value}%` },
+                { key: 'lpIncentiveSplit', label: 'LPs Split (%)', format: (value: number) => `${value}%` },
             ])}
 
             {renderSection("Strategy Parameters", [

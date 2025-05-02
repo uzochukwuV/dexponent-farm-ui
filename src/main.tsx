@@ -18,6 +18,7 @@ import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 
 import App from './App.tsx'
+import UniswapTwapOracle from './components/Test.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -36,8 +37,15 @@ const indexRoute = createRoute({
   component: App,
 })
 
+const nextRoute = createRoute({
+  getParentRoute:()=> rootRoute,
+  path:"/test",
+  component: UniswapTwapOracle 
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
+  nextRoute,  
   DemoTanstackQuery(rootRoute),
 ])
 

@@ -19,6 +19,8 @@
     "@tanstack/react-query-devtools": "^5.66.5",
     "@tanstack/react-router": "^1.114.3",
     "@tanstack/react-router-devtools": "^1.114.3",
+    "@uniswap/v3-core": "^1.0.1",
+    "@uniswap/v3-sdk": "^3.25.2",
     "ethers": "^6.13.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

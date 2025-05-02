@@ -19,7 +19,7 @@ export const farmResolver: Resolver<FarmFormValues> = async (values) => {
     };
   }
 
-  if (!values.asset) {
+  if (!values.asset && !/^0x[a-fA-F0-9]{40}$/.test(values.asset)) {
     errors.asset = {
       type: 'required',
       message: 'Principal asset is required'
@@ -86,17 +86,17 @@ export const farmResolver: Resolver<FarmFormValues> = async (values) => {
   // Assuming 'values' is an object containing form values and 'errors' is an object to store validation errors
 
 // Validation for Claim Token Address
-if (values.claimToken && !/^0x[a-fA-F0-9]{40}$/.test(values.claimToken)) {
+if (values.claimTokenName ) {
   errors.claimToken = {
-    type: 'pattern',
-    message: 'Invalid Claim Token address. Must be a valid Ethereum address.'
+    type: 'required',
+    message: 'Invalid Claim Token name is required'
   };
 }
 // You might also want a 'required' validation if the claim token is mandatory
-if (!values.claimToken) {
+if (!values.claimTokenSymbol) {
   errors.claimToken = {
     type: 'required',
-    message: 'Claim Token address is required.'
+    message: 'Claim Token symbol is required.'
   };
 }
 
@@ -150,7 +150,8 @@ export const useFarmForm = () => {
       feeDistribution: 'weekly',
       collateralAssets: [],
       termsAccepted: false,
-      claimToken: "",
+      claimTokenName: "",
+      claimTokenSymbol:"",
       farmOwner:""
     },
     mode: 'onBlur'

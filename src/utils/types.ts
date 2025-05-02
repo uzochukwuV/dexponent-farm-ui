@@ -34,6 +34,7 @@ export interface FarmFormValues {
   
     // Step 5: Review & Deployment
     termsAccepted: boolean;
-    claimToken: string | `0x${string}`;
+    claimTokenName: string;
+    claimTokenSymbol:string;
     farmOwner: string | `0x${string}`;
   }
